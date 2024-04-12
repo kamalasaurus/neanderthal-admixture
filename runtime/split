@@ -8,7 +8,7 @@ rootname=${filename::-4}
 bcftools view $rootname.vcf -l 1 -O b > $rootname.bcf
 bcftools index $rootname.bcf
 
-mkdir unused whole
+mkdir -p unused whole
 
 bcftools index -s $rootname.bcf | \
   cut -f 1 | \
