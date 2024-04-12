@@ -8,6 +8,8 @@ rootname=${filename::-4}
 
 echo 'training HMM on ingroup observations'
 
+cd ./output
+
 hmmix \
 train \
 -obs=obs.$rootname.txt \

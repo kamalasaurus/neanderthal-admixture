@@ -8,6 +8,8 @@ rootname=${filename::-4}
 
 echo 'creating ingroups for introgression detection'
 
+cd ./output
+
 python3 \
 /Introgression-detection/src/main.py \
 create_ingroup \

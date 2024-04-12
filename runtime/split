@@ -10,7 +10,7 @@ echo 'converting vcf to bcf'
 bcftools view $rootname.vcf -l 1 -O b > $rootname.bcf
 bcftools index $rootname.bcf
 
-mkdir -p unused whole
+mkdir -p unused whole output
 
 echo 'splitting whole genome bcf to chromosome files'
 

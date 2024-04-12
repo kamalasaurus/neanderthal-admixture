@@ -8,6 +8,8 @@ rootname=${filename::-4}
 
 echo 'annotating ingroup variants with archaic alleles'
 
+cd ./output
+
 hmmix \
 decode \
 -obs=obs.$rootname.txt \
