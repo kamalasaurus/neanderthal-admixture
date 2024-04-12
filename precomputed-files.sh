@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 mkdir precomputed-files
 wget https://zenodo.org/api/records/10806733/files-archive

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 mkdir hg38-archaic
 wget https://zenodo.org/api/records/10806726/files-archive
