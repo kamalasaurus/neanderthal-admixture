@@ -3,7 +3,7 @@
 cd /data
 
 filename=`ls *.vcf`
-rootname=${filename::4}
+rootname=${filename::-4}
 
 bcftools view $rootname.vcf -l 1 -O b > $rootname.bcf
 bcftools index $rootname.bcf

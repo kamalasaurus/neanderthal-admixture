@@ -4,7 +4,7 @@ cd /data
 
 filepath=`ls whole/*.vcf`
 filename="${filepath##*/}"
-rootname=${filename::4}
+rootname=${filename::-4}
 
 python3 \
 /Introgression-detection/src/main.py \
