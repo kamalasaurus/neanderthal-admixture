@@ -1,0 +1,19 @@
+#!/bin/sh
+
+cd /data
+
+filepath=`ls whole/*.vcf`
+filename="${filepath##*/}"
+rootname=${filename::4}
+
+python3 \
+/Introgression-detection/src/main.py \
+create_ingroup \
+-ind=$rootname \
+-vcf=/data/\*.bcf \
+-weights=/precomputed-files/strick_callability_mask_hg38.bed \
+-outgroup=/precomputed-files/Outgroup_1000g_HGDP_hg38.txt \
+-ancestral=/hg38-ancestral/\*.fa \
+-out=obs
+
+cd ..

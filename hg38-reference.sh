@@ -11,6 +11,3 @@ mv *_* scaffold
 mv *EBV* scaffold
 mv *M* scaffold
 cd ..
-
-#for i in *; do bcftools view $i -l 1 -O b > ${i::-4}.bcf ; done;
-#for i in *.bcf; do bcftools index $i; done;

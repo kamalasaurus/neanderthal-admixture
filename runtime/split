@@ -1,0 +1,21 @@
+#!/bin/sh
+
+cd /data
+
+filename=`ls *.vcf`
+rootname=${filename::4}
+
+bcftools view $rootname.vcf -l 1 -O b > $rootname.bcf
+bcftools index $rootname.bcf
+
+mkdir unused whole
+
+bcftools index -s $rootname.bcf | \
+  cut -f 1 | \
+  while read C; do bcftools view -O z -o ${C}.bcf $rootname.bcf "${C}" ; done;
+mv *_* unused
+mv $rootname.* whole
+
+for i in *.bcf; do bcftools index $i; done;
+
+cd ..

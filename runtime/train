@@ -1,0 +1,16 @@
+#!/bin/sh
+
+cd /data
+
+filepath=`ls whole/*.vcf`
+filename="${filepath##*/}"
+rootname=${filename::4}
+
+hmmix \
+train \
+-obs=obs.$rootname.txt \
+-weights=/precomputed-files/strick_callability_mask_hg38.bed \
+-mutrates=/precomputed-files/mutationrate_hg38.bed \
+-out=trained.$rootname.json
+
+cd ..

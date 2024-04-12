@@ -1,0 +1,18 @@
+#!/bin/sh
+
+cd /data
+
+filepath=`ls whole/*.vcf`
+filename="${filepath##*/}"
+rootname=${filename::4}
+
+hmmix \
+decode \
+-obs=obs.$rootname.txt \
+-weights=/precomputed-files/strick_callability_mask_hg38.bed \
+-mutrates=/precomputed-files/mutationrate_hg38.bed \
+-param=trained.$rootname.json \
+-admixpop=/hg38-archaic/\*.bcf \
+-out=$rootname.decoded
+
+cd ..
