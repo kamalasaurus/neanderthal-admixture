@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd /opt
+
 wget http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/analysisSet/hg38.analysisSet.chroms.tar.gz
 tar -xvzf hg38.analysisSet.chroms.tar.gz
 rm hg38.analysisSet.chroms.tar.gz

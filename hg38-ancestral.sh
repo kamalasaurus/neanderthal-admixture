@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd /opt
+
 wget ftp://ftp.ensembl.org/pub/release-111/fasta/ancestral_alleles/homo_sapiens_ancestor_GRCh38.tar.gz
 tar -xvzf homo_sapiens_ancestor_GRCh38.tar.gz
 rm homo_sapiens_ancestor_GRCh38.tar.gz

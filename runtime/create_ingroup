@@ -11,13 +11,13 @@ echo 'creating ingroups for introgression detection'
 cd ./output
 
 python3 \
-/Introgression-detection/src/main.py \
+/opt/Introgression-detection/src/main.py \
 create_ingroup \
 -ind=$rootname \
 -vcf=/data/\*.bcf \
--weights=/precomputed-files/strick_callability_mask_hg38.bed \
--outgroup=/precomputed-files/Outgroup_1000g_HGDP_hg38.txt \
--ancestral=/hg38-ancestral/\*.fa \
+-weights=/opt/precomputed-files/strick_callability_mask_hg38.bed \
+-outgroup=/opt/precomputed-files/Outgroup_1000g_HGDP_hg38.txt \
+-ancestral=/opt/hg38-ancestral/\*.fa \
 -out=obs
 
 cd ..

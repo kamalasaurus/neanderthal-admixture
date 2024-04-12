@@ -13,8 +13,8 @@ cd ./output
 hmmix \
 train \
 -obs=obs.$rootname.txt \
--weights=/precomputed-files/strick_callability_mask_hg38.bed \
--mutrates=/precomputed-files/mutationrate_hg38.bed \
+-weights=/opt/precomputed-files/strick_callability_mask_hg38.bed \
+-mutrates=/opt/precomputed-files/mutationrate_hg38.bed \
 -out=trained.$rootname.json
 
 cd ..

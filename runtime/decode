@@ -13,10 +13,10 @@ cd ./output
 hmmix \
 decode \
 -obs=obs.$rootname.txt \
--weights=/precomputed-files/strick_callability_mask_hg38.bed \
--mutrates=/precomputed-files/mutationrate_hg38.bed \
+-weights=/opt/precomputed-files/strick_callability_mask_hg38.bed \
+-mutrates=/opt/precomputed-files/mutationrate_hg38.bed \
 -param=trained.$rootname.json \
--admixpop=/hg38-archaic/\*.bcf \
+-admixpop=/opt/hg38-archaic/\*.bcf \
 -out=$rootname.decoded
 
 cd ..
