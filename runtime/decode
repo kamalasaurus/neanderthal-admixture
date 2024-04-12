@@ -6,6 +6,8 @@ filepath=`ls whole/*.vcf`
 filename="${filepath##*/}"
 rootname=${filename::-4}
 
+echo 'annotating ingroup variants with archaic alleles'
+
 hmmix \
 decode \
 -obs=obs.$rootname.txt \

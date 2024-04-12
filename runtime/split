@@ -5,16 +5,25 @@ cd /data
 filename=`ls *.vcf`
 rootname=${filename::-4}
 
+echo 'converting vcf to bcf'
+
 bcftools view $rootname.vcf -l 1 -O b > $rootname.bcf
 bcftools index $rootname.bcf
 
 mkdir -p unused whole
 
+echo 'splitting whole genome bcf to chromosome files'
+
 bcftools index -s $rootname.bcf | \
   cut -f 1 | \
   while read C; do bcftools view -O z -o ${C}.bcf $rootname.bcf "${C}" ; done;
+
+echo 'moving scaffolds and whole files to subdirectories'
+
 mv *_* unused
 mv $rootname.* whole
+
+echo 'indexing chromosome files'
 
 for i in *.bcf; do bcftools index $i; done;
 

@@ -6,6 +6,8 @@ filepath=`ls whole/*.vcf`
 filename="${filepath##*/}"
 rootname=${filename::-4}
 
+echo 'training HMM on ingroup observations'
+
 hmmix \
 train \
 -obs=obs.$rootname.txt \
