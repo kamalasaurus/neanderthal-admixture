@@ -1,0 +1,175 @@
+
+```{r}
+library(chromoMap)
+```
+
+```{r}
+denisovan_or_neanderthal <- function (frame_row) {
+  neanderthal_content <- max(
+    as.numeric(frame_row['AltaiNeandertal']),
+    as.numeric(frame_row['Vindija33.19']),
+    as.numeric(frame_row['Chagyrskaya.Phalanx'])
+  )
+  denisovan_content <- as.numeric(frame_row['Denisova'])
+  if (denisovan_content > neanderthal_content) return('denisovan')
+  else return('neanderthal')
+}
+```
+
+
+```{r}
+chr_file <- read.table('./chr.txt', sep="\t")
+snps <- read.table('./whole-genome.decoded.diploid.txt', sep="\t", header = T)
+archaic_snps <- snps[snps$state == 'Archaic',]
+anno_file <- data.frame(
+  V1=paste0(archaic_snps$chrom, archaic_snps$start),
+  V2=archaic_snps$chrom,
+  V3=archaic_snps$start,
+  V4=archaic_snps$end
+)
+```
+
+```{r}
+chromoMap(list(chr_file), list(anno_file), export.options = T)
+```
+
+```{r}
+total_dna_length <- sum(chr_file$V3)
+total_archaic_length <- sum(archaic_snps[archaic_snps$mean_prob > 0.9,]$length)
+percent_archaic <- total_archaic_length / total_dna_length
+print(percent_archaic)
+```
+
+```{r}
+d_or_n <- apply(archaic_snps, 1, denisovan_or_neanderthal)
+d_or_n_file <- data.frame(
+  anno_file,
+  V5=d_or_n
+)
+```
+
+```{r}
+chromoMap(
+  list(chr_file),
+  list(d_or_n_file),
+  data_based_color_map = T,
+  data_type = "categorical",
+  data_colors = list(c("orange", "yellow")),
+  legend = T,
+  lg_x = 150,
+  lg_y = 250,
+  export.options = T
+)
+```
+
+```{r}
+d_or_n_snps <- data.frame(
+  archaic_snps,
+  introgression_source=d_or_n
+)
+
+total_dna_length <- sum(chr_file$V3)
+
+total_neanderthal_length <- sum(d_or_n_snps[d_or_n_snps$introgression_source == "neanderthal" & d_or_n_snps$mean_prob > 0.9,]$length)
+percent_neanderthal <- total_neanderthal_length / total_dna_length
+print(percent_neanderthal)
+
+total_denisovan_length <- sum(d_or_n_snps[d_or_n_snps$introgression_source == "denisovan" & d_or_n_snps$mean_prob > 0.9,]$length)
+percent_denisovan <- total_denisovan_length / total_dna_length
+print(percent_denisovan)
+```
+
+```{r}
+prob_file <- data.frame(
+  anno_file,
+  V5=archaic_snps$mean_prob
+)
+```
+
+```{r}
+chromoMap(
+  list(chr_file),
+  list(prob_file),
+  data_based_color_map = T,
+  data_type = "numeric",
+  plots = "bar",
+  heat_map = F,
+  ref_line = T,
+  refl_pos = 0.9,
+  plot_color = c("gray"),
+  plot_filter = list(c("gte", 0.9, "red")),
+  #data_colors = list(c("orange", "yellow")),
+  #legend = T,
+  #plot.legend.labels = c("probability of introgression"),
+  #lg_x = 150,
+  #lg_y = 350,
+  export.options = T
+)
+```
+
+```{r}
+neanderthal_snps <- d_or_n_snps[d_or_n_snps$introgression_source == "neanderthal",]
+
+neander_prob_file <- data.frame(
+  V1=paste0(neanderthal_snps$chrom, neanderthal_snps$start),
+  V2=neanderthal_snps$chrom,
+  V3=neanderthal_snps$start,
+  V4=neanderthal_snps$end,
+  V5=neanderthal_snps$mean_prob
+)
+
+chromoMap(
+  list(chr_file),
+  list(neander_prob_file),
+  data_based_color_map = T,
+  data_type = "numeric",
+  plots = "bar",
+  heat_map = F,
+  ref_line = T,
+  refl_pos = 0.9,
+  plot_color = c("gray"),
+  plot_filter = list(c("gte", 0.9, "red")),
+  #data_colors = list(c("orange", "yellow")),
+  #legend = T,
+  #plot.legend.labels = c("probability of introgression"),
+  #lg_x = 150,
+  #lg_y = 350,
+  export.options = T
+)
+```
+
+
+
+```{r}
+denisovan_snps <- d_or_n_snps[d_or_n_snps$introgression_source == "denisovan",]
+
+
+denis_prob_file <- data.frame(
+  V1=paste0(denisovan_snps$chrom, denisovan_snps$start),
+  V2=denisovan_snps$chrom,
+  V3=denisovan_snps$start,
+  V4=denisovan_snps$end,
+  V5=denisovan_snps$mean_prob
+)
+
+chromoMap(
+  list(chr_file),
+  list(denis_prob_file),
+  data_based_color_map = T,
+  data_type = "numeric",
+  plots = "bar",
+  heat_map = F,
+  ref_line = T,
+  refl_pos = 0.9,
+  plot_color = c("gray"),
+  plot_filter = list(c("gte", 0.9, "red")),
+  #data_colors = list(c("orange", "yellow")),
+  #legend = T,
+  #plot.legend.labels = c("probability of introgression"),
+  #lg_x = 150,
+  #lg_y = 350,
+  export.options = T
+)
+```
+
+
