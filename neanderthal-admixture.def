@@ -1,0 +1,23 @@
+Bootstrap: docker
+From: continuumio/miniconda3:24.1.2-0
+
+%post
+	git clone https://github.com/kamalasaurus/neanderthal-admixture.git /opt/neanderthal-admixture
+
+	/opt/neanderthal-admixture/base-dependencies.sh
+	/opt/neanderthal-admixture/precomputed-files.sh
+	/opt/neanderthal-admixture/hg38-archaic.sh
+	/opt/neanderthal-admixture/hg38-ancestral.sh
+	/opt/neanderthal-admixture/hg38-reference.sh
+
+%runscript
+	echo "Container was created $NOW"
+	/opt/neanderthal-admixture/runtime/split
+	/opt/neanderthal-admixture/runtime/create_ingroup
+	/opt/neanderthal-admixture/runtime/train
+	/opt/neanderthal-admixture/runtime/decode
+
+%labels
+	Author kamalasaurus@gmail.com
+	Version v0.0.1
+
