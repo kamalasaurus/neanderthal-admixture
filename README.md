@@ -14,14 +14,11 @@ sudo dnf install epel-release
 sudo dnf install singularity-ce
 ```
 
-```
-# for debian derived linuces
-apt install epel-release
-apt install singularlity-ce
-```
+### For Debian derived Linuces, MacOS, Windows, etc
+Follow the instructions here [Install SingularityCE](https://docs.sylabs.io/guides/latest/admin-guide/installation.html)
 
-### MacOS
-Unfortunately, you need to install a virtualized Linux container to run Singularity (a container to hold your container).  This is a failure of the philosophy of containerization, certainly.  It seems Singularity is not quite as widely supported as Docker for multi-platform runtimes.
+#### MacOS Apple Silicon
+You can also install a virtualized Linux container to run Singularity (a container to hold your container).  This is a failure of the philosophy of containerization, certainly.  It seems Singularity is not quite as widely supported as Docker for multi-platform runtimes.  The official approach might work with the latest version of SingularityCE.
 
 Follow the instructions here [SingularityCE on Apple Silicon](https://sylabs.io/2023/03/installing-singularityce-on-macos-with-apple-silicon-using-utm-rocky/)
 
@@ -38,14 +35,13 @@ Now you will have a shell window into your virtual Linux environment from your n
 More general documentation on UTM can be found [here](https://docs.getutm.app/settings-qemu/devices/network/port-forwarding/).
 
 ## Download Singularity Container
+Deployment pending on storage availability.  In the mean time, you can just download it from this google drive:
 
 ### amd64:
-```
-singularity pull library://kamalasaurus/containers/neanderthal-admixture:0.0.1
-```
+[neanderthal-admixture-amd64.sif](https://drive.google.com/file/d/1F8VQ3gEr2A0ksfnGUjiuHRUKKd2aQb5r/view?usp=sharing)
 
 ### aarch64:
-Deployment pending on storage availability.  In the mean time, you can just download it from this google drive:  [neanderthal-admixture.sif](https://drive.google.com/file/d/13QbDPJXe9AFMBT1px1TZCupKnuXGdn_6/view?usp=sharing)
+[neanderthal-admixture-aarch64.sif](https://drive.google.com/file/d/13QbDPJXe9AFMBT1px1TZCupKnuXGdn_6/view?usp=sharing)
 
 ## Usage
 Recreate this folder structure adjacent to the container you've downloaded:
