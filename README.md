@@ -44,7 +44,7 @@ Deployment pending on storage availability.  In the mean time, you can just down
 [neanderthal-admixture-aarch64.sif](https://drive.google.com/file/d/13QbDPJXe9AFMBT1px1TZCupKnuXGdn_6/view?usp=sharing)
 
 ## Usage
-Recreate this folder structure adjacent to the container you've downloaded:
+Rename your download to `neanderthal-admixture.sif` and recreate this folder structure adjacent to the container you've downloaded:
 
 ```
 .
